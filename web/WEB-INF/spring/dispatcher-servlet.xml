@@ -18,7 +18,13 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
-    <!--interceptor 빈 생성-->
-    <!--<bean id="loginInterceptor" class="kr.pe.hoon.interceptor.LoginInterceptor"></bean>-->
+    <!-- interceptor -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <bean id="loggerInterceptor"
+                        class="com.board.interceptor.LoggerInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>

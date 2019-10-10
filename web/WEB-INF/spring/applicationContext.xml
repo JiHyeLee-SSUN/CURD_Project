@@ -2,25 +2,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- Bean 스캔 -->
     <context:component-scan base-package="com.board"/>
 
     <!--DB연결 설정-->
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="/WEB-INF/config/config.properties"/>
-        <property name="fileEncoding" value="UTF-8" />
-    </bean>
+    <!-- db.properties.xml -->
+    <util:properties id="config" location="classpath:/config/config.xml" />
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${db.driver}"></property>
-        <property name="url" value="${db.url}"></property>
-        <property name="username" value="${db.username}"></property>
-        <property name="password" value="${db.password}"></property>
+        <property name="driverClassName" value="#{config['db.driverClassName']}"></property>
+        <property name="url" value="#{config['db.jdbcUrl']}"></property>
+        <property name="username" value="#{config['db.username']}"></property>
+        <property name="password" value="#{config['db.password']}"></property>
     </bean>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

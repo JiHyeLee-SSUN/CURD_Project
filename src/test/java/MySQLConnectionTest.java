@@ -12,10 +12,8 @@
  ***/
 
 import java.sql.Connection;
-
 import javax.inject.Inject;
 import javax.sql.DataSource;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -27,7 +25,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = { "file:web/WEB-INF/spring/applicationContext.xml" })
 public class MySQLConnectionTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(MySQLConnectionTest.class);
+    protected final Logger log = LoggerFactory.getLogger(this.getClass());
+
     @Inject
     private DataSource ds;
 
@@ -36,7 +35,7 @@ public class MySQLConnectionTest {
 
         try (Connection con = ds.getConnection()) {
 
-            logger.info("\n >>>>>>>>>> Connection 출력 : " + con + "\n");
+            log.info("\n >>>>>>>>>> Connection 출력 : " + con + "\n");
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- configuration file for LogBack (slf4J implementation) See here for more
+  details: http://gordondickens.com/wordpress/2013/03/27/sawing-through-the-java-loggers/ -->
+
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <!-- To enable JMX Management -->
+    <jmxConfigurator />
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{32}[%method:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <if condition='property("spring.profiles.active").equals("run")'>
+        <then>
+            <property name="LOG_DIR" value="logs/run" />
+            <property name="LOG_LEVEL" value="WARN" />
+        </then>
+        <else>
+            <property name="LOG_DIR" value="logs/dev" />
+            <property name="LOG_LEVEL" value="INFO" />
+        </else>
+    </if>
+
+
+    <property name="LOG_PATH_NAME" value="${LOG_DIR}/spring-logback-test.log" />
+
+    <appender name="LOG_FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH_NAME}</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH_NAME}.%d{yyyy-MM-dd}.%i.log.gz
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>60KB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>5</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{32}[%method:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <if condition='property("spring.profiles.active").equals("loc")'>
+        <then>
+            <logger name="com.spring.test" level="debug" />
+        </then>
+        <else>
+            <logger name="com.spring.test" level="warn" />
+        </else>
+    </if>
+
+    <root level="${LOG_LEVEL}">
+        <if condition='property("spring.profiles.active").equals("loc")'>
+            <then>
+                <appender-ref ref="CONSOLE" />
+            </then>
+            <else>
+                <appender-ref ref="LOG_FILE" />
+            </else>
+        </if>
+    </root>
+
+</configuration>
