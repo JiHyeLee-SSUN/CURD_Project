@@ -13,7 +13,7 @@
         <org.springframework-version>4.3.18.RELEASE</org.springframework-version>
         <org.aspectj-version>1.6.10</org.aspectj-version>
         <!--<org.slf4j-version>1.6.6</org.slf4j-version>-->
-        <slf4j.version>1.7.21</slf4j.version>
+        <slf4j.version>1.7.7</slf4j.version>
         <logback.version>1.1.7</logback.version>
     </properties>
 
@@ -23,13 +23,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${org.springframework-version}</version>
-           <!-- <exclusions>
-                &lt;!&ndash; Exclude Commons Logging in favor of SLF4j &ndash;&gt;
+            <exclusions>
+                <!-- Exclude Commons Logging in favor of SLF4j -->
                 <exclusion>
                     <groupId>commons-logging</groupId>
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
-            </exclusions>-->
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -97,6 +97,7 @@
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
             <version>${slf4j.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>

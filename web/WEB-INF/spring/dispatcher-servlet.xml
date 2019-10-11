@@ -9,7 +9,7 @@
     <!-- Annotation 활성화 -->
     <mvc:annotation-driven/>
     <!-- Component 패키지 지정 -->
-    <context:component-scan base-package="com.board.controller"></context:component-scan>
+    <context:component-scan base-package="com.board"></context:component-scan>
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
@@ -19,11 +19,11 @@
     </bean>
 
     <!-- interceptor -->
+    <bean id="loggerInterceptor" class="com.board.interceptor.LoggerInterceptor" />
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**" />
-            <bean id="loggerInterceptor"
-                        class="com.board.interceptor.LoggerInterceptor" />
+            <ref bean="loggerInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

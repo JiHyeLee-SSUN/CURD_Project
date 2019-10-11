@@ -1,72 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- configuration file for LogBack (slf4J implementation) See here for more
-  details: http://gordondickens.com/wordpress/2013/03/27/sawing-through-the-java-loggers/ -->
-
 <configuration scan="true" scanPeriod="30 seconds">
 
-    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
-        <resetJUL>true</resetJUL>
-    </contextListener>
 
-    <!-- To enable JMX Management -->
-    <jmxConfigurator />
+    <property name="LOG_DIR" value="/CRUD_Board/logs"/>
+    <property name="LOG_PATTERN" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} [%file:%line] -%msg%n"/>
 
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <!--콘솔 출력-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{32}[%method:%line] - %msg%n</pattern>
+            <pattern>
+                ${LOG_PATTERN}
+            </pattern>
         </encoder>
     </appender>
 
-    <if condition='property("spring.profiles.active").equals("run")'>
-        <then>
-            <property name="LOG_DIR" value="logs/run" />
-            <property name="LOG_LEVEL" value="WARN" />
-        </then>
-        <else>
-            <property name="LOG_DIR" value="logs/dev" />
-            <property name="LOG_LEVEL" value="INFO" />
-        </else>
-    </if>
-
-
-    <property name="LOG_PATH_NAME" value="${LOG_DIR}/spring-logback-test.log" />
-
-    <appender name="LOG_FILE"
-              class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH_NAME}</file>
-        <append>true</append>
+    <!--level Error log file-->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>error</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>${LOG_DIR}/error/crud-error-app.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH_NAME}.%d{yyyy-MM-dd}.%i.log.gz
-            </fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy
-                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>60KB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <maxHistory>5</maxHistory>
+            daily rollover
+            <fileNamePattern>${LOG_DIR}/error/crud-error-app.log.%d{yyyy-MM-dd}.log</fileNamePattern>
+            keep 15 days' worth of history
+            <maxHistory>60</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{32}[%method:%line] - %msg%n</pattern>
+            <pattern>${LOG_PATTERN}</pattern>
         </encoder>
     </appender>
 
-    <if condition='property("spring.profiles.active").equals("loc")'>
-        <then>
-            <logger name="com.spring.test" level="debug" />
-        </then>
-        <else>
-            <logger name="com.spring.test" level="warn" />
-        </else>
-    </if>
+    <!--level Debug log file-->
+    <appender name="DEBUGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>debug</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>${LOG_DIR}/debug/crud-debug-app.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            daily rollover
+            <fileNamePattern>${LOG_DIR}/debug/crud-debug-app.log.%d{yyyy-MM-dd}.log</fileNamePattern>
+            keep 15 days' worth of history
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
 
-    <root level="${LOG_LEVEL}">
-        <if condition='property("spring.profiles.active").equals("loc")'>
-            <then>
-                <appender-ref ref="CONSOLE" />
-            </then>
-            <else>
-                <appender-ref ref="LOG_FILE" />
-            </else>
-        </if>
+    <!--level Debug log file-->
+    <appender name="INFOFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>info</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>${LOG_DIR}/info/crud-info-app.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            daily rollover
+            <fileNamePattern>${LOG_DIR}/debug/crud-info-app.log.%d{yyyy-MM-dd}.log</fileNamePattern>
+            keep 15 days' worth of history
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!--Debug level-->
+    <!--<logger name="org.springframework" level="DEBUG" >
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="ERROR" />
+        <appender-ref ref="DEBUGFILE"/>
+    </logger>
+    -->
+    <!-- Query Loggers -->
+    <logger name="jdbc" level="OFF"/>
+
+    <logger name="jdbc.sqlonly" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="DEBUGFILE"/>
+    </logger>
+
+    <!-- log SQL with timing information, post execution -->
+    <logger name="jdbc.sqltiming" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="DEBUGFILE"/>
+    </logger>
+
+    <logger name="jdbc.resultsettable" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="DEBUGFILE"/>
+    </logger>
+    <!-- turn OFF all logging (children can override) -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="ERROR"/>
+        <!--<appender-ref ref="DEBUGFILE"/>-->
     </root>
-
 </configuration>

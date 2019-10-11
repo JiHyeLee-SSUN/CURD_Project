@@ -24,11 +24,11 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoggerInterceptor extends HandlerInterceptorAdapter {
 
-    protected final Logger log = LoggerFactory.getLogger(this.getClass());
+    private static final Logger log = LoggerFactory.getLogger(LoggerInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (log.isDebugEnabled()) {
+        if (log.isInfoEnabled()) {
             log.info("====================================== START ======================================");
             log.info(" Request URI \t: " + request.getRequestURI());
         }
@@ -38,7 +38,7 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        if (log.isDebugEnabled()) {
+        if (log.isInfoEnabled()) {
             log.info("====================================== END ======================================\n");
         }
 
