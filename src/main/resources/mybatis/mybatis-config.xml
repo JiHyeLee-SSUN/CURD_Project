@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-    <typeAliases>
-        <package name="com.board.domain"/>
+    <typeAliases >
+        <typeAlias alias="UserVO" type ="com.board.domain.UserVO"/>
     </typeAliases>
 </configuration>

@@ -27,7 +27,9 @@
     <%-- //bootstrap--%>
 
     <%--jquery--%>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+
+    <%--<script src="http://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>--%>
     <script type="text/javascript" src="/resources/js/upload.js"></script>
     <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
             charset="utf-8"></script>
@@ -75,7 +77,7 @@
                 </div>
             </li>
             <li style="padding: 10px">
-                <h5 style="color: white;">
+                <h5 style="color: white;"></h5>
             </li>
             <li style="padding: 10px">
                 <h5 style="color: white;">

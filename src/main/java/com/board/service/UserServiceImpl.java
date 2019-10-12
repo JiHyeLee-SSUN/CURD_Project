@@ -11,14 +11,17 @@
  Github : https://github.com/JiHyeLee-SSUN/Project_Togather.git
  ***/
 package com.board.service;
-
 import com.board.dao.UserDAO;
 import com.board.domain.UserVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private UserDAO uDAO;

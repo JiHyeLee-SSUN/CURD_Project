@@ -20,6 +20,8 @@ var uidObj = $("#uid");
 var pwObj = $("#pw");
 var pwckObj = $("#pwck");
 var emailObj = $("#email");
+var uid = $("#uid").val();
+var idMsg = $("#id-msg");
 
 $(function () {
     // uid 입력창 keyup시
@@ -72,8 +74,8 @@ function pwCheck() {
 
 <!-- 2. ajax uid 중복 체크 -->
 function joinIdCheck() {
-    var uid = $("#uid").val();
-    var idMsg = $("#id-msg");
+    uid = $("#uid").val();
+    idMsg = $("#id-msg");
 
     $.ajax({
         type    : "GET",

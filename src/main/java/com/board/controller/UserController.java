@@ -13,8 +13,6 @@
 package com.board.controller;
 
 import com.board.service.UserService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +42,9 @@ public class UserController {
     // 회원가입 관련 ajax 처리(중복 uid, email 체크)
     // ajax uid 중복체크
     @ResponseBody
-    @RequestMapping(value = "joinUidCheck.do", method = RequestMethod.GET)
+    @RequestMapping(value = "joinUidCheck", method = RequestMethod.GET)
     public ResponseEntity<String> joinUidCheck(String uid) {
         ResponseEntity<String> entity = null;
-
         try {
             if (userService.readByUid(uid) != null) {
                 entity = new ResponseEntity<>("UID_DUP", HttpStatus.OK);
@@ -55,6 +52,7 @@ public class UserController {
                 entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
             }
         } catch (Exception e) {
+            logger.info("not found");
             e.printStackTrace();
             entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

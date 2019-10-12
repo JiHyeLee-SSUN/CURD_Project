@@ -72,12 +72,12 @@
     </appender>
 
     <!--Debug level-->
-    <!--<logger name="org.springframework" level="DEBUG" >
-        <appender-ref ref="STDOUT" />
+    <logger name="org.springframework" level="DEBUG" >
+        <!--<appender-ref ref="STDOUT" />-->
         <appender-ref ref="ERROR" />
         <appender-ref ref="DEBUGFILE"/>
     </logger>
-    -->
+
     <!-- Query Loggers -->
     <logger name="jdbc" level="OFF"/>
 

@@ -16,10 +16,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/header.jsp" %>
 
-
 <div class="container">
     <div ></div>
-    <div >
+    <div>
         <div class="jumbotron" style="padding-top: 20px;" align="center">
             <form action="/user/joinPost" method="post">
                 <h3>회원가입</h3>
@@ -69,5 +68,4 @@
     <div></div>
 </div>
 <script type="text/javascript" src="/resources/js/user/join.js"></script>
-
 <%@ include file="../include/footer.jsp" %>

@@ -1,7 +1,3 @@
-package com.board.service;
-
-import com.board.domain.UserVO;
-
 /***
  Created by IntelliJ IDEA.
  Project : CURD_Board
@@ -14,7 +10,10 @@ import com.board.domain.UserVO;
  Blog : https://2-jissun.tistory.com/
  Github : https://github.com/JiHyeLee-SSUN/Project_Togather.git
  ***/
+
+package com.board.service;
+import com.board.domain.UserVO;
+
 public interface UserService {
-    /**/
     public UserVO readByUid(String uid) throws Exception;
 }

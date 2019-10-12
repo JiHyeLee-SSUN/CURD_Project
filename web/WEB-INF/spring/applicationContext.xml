@@ -8,12 +8,13 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <!-- Bean 스캔 -->
-    <context:component-scan base-package="com.board"/>
 
     <!--DB연결 설정-->
-    <!-- db.properties.xml -->
-    <util:properties id="config" location="classpath:/config/config.xml" />
+
+    <!-- DB Properties.xml -->
+    <util:properties id="config" location="classpath:/config/config.xml"/>
+
+    <context:component-scan base-package="com.board.dao"/>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="#{config['db.driverClassName']}"></property>
@@ -24,14 +25,12 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
-        <!--<property name="mapperLocations" value="classpath*:/com/board/mapper/*.xml"></property>
-        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>-->
+        <property name="mapperLocations" value="classpath:/mappers/**/*.xml"></property>
+        <property name="configLocation" value="classpath:/mybatis/mybatis-config.xml"></property>
     </bean>
 
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
     </bean>
-
-
 
 </beans>

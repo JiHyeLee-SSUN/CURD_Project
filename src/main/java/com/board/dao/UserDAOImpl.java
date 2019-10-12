@@ -13,18 +13,21 @@
 package com.board.dao;
 
 import com.board.domain.UserVO;
-import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 
 @Repository
 public class UserDAOImpl implements UserDAO {
 
     @Autowired
-    private SqlSession sqlSession;
+    protected SqlSessionTemplate sqlSessionTemplate;
+
+    private static final String NAMESPACE ="com.board.mapper.userMapper";
 
     @Override
-    public UserVO readByUid(String uid) throws Exception {
-        return sqlSession.selectOne("user.readByUid", uid);
+    public UserVO readByUid(String uid)  {
+        return sqlSessionTemplate.selectOne(NAMESPACE+".readByUid", uid);
     }
 }
