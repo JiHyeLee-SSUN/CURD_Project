@@ -4,9 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.board.mapper.userMapper">
-    <select id="readByUid" resultType="UserVO">
+    <select id="readByUid" resultType="UserVO" parameterType="string">
 		select *
 		from tbl_user
 		where uid = #{uid}
+	</select>
+
+	<select id="readByEmail" resultType="UserVO" parameterType="string">
+		select *
+		from tbl_user
+		where email = #{email}
 	</select>
 </mapper>

@@ -30,4 +30,9 @@ public class UserServiceImpl implements UserService {
     public UserVO readByUid(String uid) throws Exception {
         return uDAO.readByUid(uid);
     }
+
+    @Override
+    public UserVO readyByEmail(String email) throws Exception {
+        return uDAO.readyByEmail(email);
+    }
 }

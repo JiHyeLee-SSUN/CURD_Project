@@ -30,4 +30,9 @@ public class UserDAOImpl implements UserDAO {
     public UserVO readByUid(String uid)  {
         return sqlSessionTemplate.selectOne(NAMESPACE+".readByUid", uid);
     }
+
+    @Override
+    public UserVO readyByEmail(String email) {
+        return sqlSessionTemplate.selectOne(NAMESPACE+".readByEmail", email);
+    }
 }

@@ -1,0 +1,44 @@
+/***
+  Created by IntelliJ IDEA.
+  Project : curd
+  User: leejihye
+  Date: 2019-10-13
+  Time: 오후 5:43
+  desc: /user/join 에 사용되는 css
+    
+  Created by altjd815@gmail.com 
+  Blog : https://2-jissun.tistory.com/
+  Github : https://github.com/JiHyeLee-SSUN/Project_Togather.git
+***/
+@charset "UTF-8";
+
+/** id check css **/
+.id-msg-green{
+    color: green;
+}
+
+.id-msg-red{
+    color: red;
+}
+
+/** password check css **/
+.pw-default{
+    color:gray;
+}
+
+.pw-correct-button{
+    color : #6ce945;
+}
+.pw-correct{
+    color : black;
+}
+
+/** email check css **/
+.email-msg-green{
+    color: green;
+}
+
+.email-msg-red{
+    color: red;
+}
+

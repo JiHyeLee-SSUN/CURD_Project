@@ -16,4 +16,5 @@ import com.board.domain.UserVO;
 
 public interface UserService {
     public UserVO readByUid(String uid) throws Exception;
+    public UserVO readyByEmail(String email) throws Exception;
 }

@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.Console;
+
 @Controller
 @RequestMapping("user")
 public class UserController {
@@ -48,11 +50,30 @@ public class UserController {
         try {
             if (userService.readByUid(uid) != null) {
                 entity = new ResponseEntity<>("UID_DUP", HttpStatus.OK);
+                logger.info(String.valueOf(entity));
+            } else {
+                entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+                logger.info(String.valueOf(entity));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return entity;
+    }
+    //ajax email 중복체크
+    @ResponseBody
+    @RequestMapping(value="joinEmailCheck",method = RequestMethod.GET)
+    public ResponseEntity<String> joinEmailCheck(String email){
+        ResponseEntity<String> entity = null;
+        try {
+            if (userService.readyByEmail(email) != null){
+                entity = new ResponseEntity<>("EMAIL_DUP", HttpStatus.OK);
             } else {
                 entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
             }
-        } catch (Exception e) {
-            logger.info("not found");
+        } catch(Exception e) {
             e.printStackTrace();
             entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
