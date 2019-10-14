@@ -4,6 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.board.mapper.userMapper">
+    <insert id="create">
+		insert into tbl_user(uid, pw, name, gender, email)
+		values (#{uid}, #{pw}, #{name}, #{gender}, #{email})
+	</insert>
     <select id="readByUid" resultType="UserVO" parameterType="string">
 		select *
 		from tbl_user

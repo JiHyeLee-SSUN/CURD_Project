@@ -12,6 +12,7 @@
  ***/
 package com.board.controller;
 
+import com.board.domain.UserVO;
 import com.board.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,6 +40,13 @@ public class UserController {
     @RequestMapping(value = "join", method = RequestMethod.GET)
     public String joinGET() {
         return "user/join";
+    }
+
+    @RequestMapping(value="joinPost", method=RequestMethod.POST)
+    public String joinPost(@ModelAttribute("uVO") UserVO uVO) throws Exception {
+        logger.info("statement join member: " + uVO.toString());
+        userService.create(uVO);
+        return "user/joinPost";
     }
 
 

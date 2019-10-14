@@ -24,7 +24,8 @@
             <form action="/user/joinPost" method="post">
                 <h3>회원가입</h3>
                 <div class="form-group" style="display: flex;">
-                    <input class="form-control" type="text" id="uid" name="uid" style="flex: 3;" placeholder="아이디"
+                    <input class="form-control" type="text" id="uid" name="uid" style="flex: 3;"
+                           placeholder="아이디 (소문자,숫자로 시작하는 특수문자[ - , _ ]조합의 6~12자리)"
                            autocomplete="off">
                     <div style="flex: 1;"></div>
                     <button type="button" class="btn btn-primary uid-check" style="flex: 1;">중복 검사</button>
@@ -35,7 +36,7 @@
 
                 <div class="form-group">
                     <input class="form-control" type="password" id="pw" name="pw"
-                           placeholder="비밀번호 (특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내">
+                           placeholder="비밀번호 (특수문자 / 문자 / 숫자 포함 형태의 8~15자리">
                 </div>
                 <div class="form-group">
                     <span id="pw-msg" style="color: red"></span>

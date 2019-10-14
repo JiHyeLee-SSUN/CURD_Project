@@ -35,4 +35,9 @@ public class UserDAOImpl implements UserDAO {
     public UserVO readyByEmail(String email) {
         return sqlSessionTemplate.selectOne(NAMESPACE+".readByEmail", email);
     }
+    @Override
+    public void create(UserVO uVO) {
+        sqlSessionTemplate.insert(NAMESPACE+".create",uVO);
+    }
+
 }

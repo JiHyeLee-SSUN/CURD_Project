@@ -7,4 +7,6 @@ public interface UserDAO {
     public UserVO readByUid(String uid) ;
     //이메일 중복 조회
     public UserVO readyByEmail(String email);
+    // 회원가입
+    public void create(UserVO uVO);
 }

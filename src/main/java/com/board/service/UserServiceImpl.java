@@ -27,6 +27,12 @@ public class UserServiceImpl implements UserService {
     private UserDAO uDAO;
 
     @Override
+    public void create(UserVO uVO) throws Exception {
+        uDAO.create(uVO);
+
+    }
+
+    @Override
     public UserVO readByUid(String uid) throws Exception {
         return uDAO.readByUid(uid);
     }
