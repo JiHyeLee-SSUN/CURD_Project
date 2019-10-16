@@ -12,11 +12,13 @@
  ***/
 package com.board.service;
 import com.board.dao.UserDAO;
+import com.board.domain.TempKey;
 import com.board.domain.UserVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,9 +28,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDAO uDAO;
 
+    @Transactional
     @Override
-    public void create(UserVO uVO) throws Exception {
-        uDAO.create(uVO);
+    public void createByUser(UserVO userVO) throws Exception {
+        uDAO.createByUser(userVO);
+
+        String authKey = new TempKey().getKey(8, false);
+        userVO.setAuthkey(authKey);
+        uDAO.updateAuthKey(userVO);
 
     }
 

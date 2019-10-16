@@ -18,5 +18,5 @@ public interface UserService {
 
     public UserVO readByUid(String uid) throws Exception;
     public UserVO readyByEmail(String email) throws Exception;
-    public void create(UserVO uVO) throws Exception;
+    public void createByUser(UserVO userVO) throws Exception;
 }

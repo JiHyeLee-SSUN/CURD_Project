@@ -45,7 +45,7 @@ public class UserController {
     @RequestMapping(value="joinPost", method=RequestMethod.POST)
     public String joinPost(@ModelAttribute("uVO") UserVO uVO) throws Exception {
         logger.info("statement join member: " + uVO.toString());
-        userService.create(uVO);
+        userService.createByUser(uVO);
         return "user/joinPost";
     }
 

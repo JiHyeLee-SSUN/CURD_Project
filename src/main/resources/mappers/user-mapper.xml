@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.board.mapper.userMapper">
-    <insert id="create">
+    <insert id="createByUser">
 		insert into tbl_user(uid, pw, name, gender, email)
 		values (#{uid}, #{pw}, #{name}, #{gender}, #{email})
 	</insert>
@@ -13,10 +13,14 @@
 		from tbl_user
 		where uid = #{uid}
 	</select>
-
-	<select id="readByEmail" resultType="UserVO" parameterType="string">
+    <select id="readByEmail" resultType="UserVO" parameterType="string">
 		select *
 		from tbl_user
 		where email = #{email}
 	</select>
+    <update id="updateAuthKey" parameterType="string">
+		update tbl_user
+		set authkey = #{authkey}
+		where email = #{email}
+	</update>
 </mapper>

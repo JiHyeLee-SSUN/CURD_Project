@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
+<properties>
+    <entry key="mail.host">smtp.gmail.com</entry>
+    <entry key="mail.port">587</entry>
+    <entry key="mail.manager">altjd815@gmail.com</entry>
+    <entry key="mail.password">fitipan301</entry>
+</properties>

@@ -96,4 +96,11 @@ public class UserVO {
     public void setUid(String uid) {
         this.uid = uid;
     }
+
+    @Override
+    public String toString() {
+        return "UserVO [uid=" + uid + ", pw=" + pw + ", name=" + name + ", gender=" + gender + ", thumbnail="
+                + thumbnail + ", email=" + email + ", authkey=" + authkey + ", authstatus=" + authstatus + ", joindate="
+                + joindate + "]";
+    }
 }

@@ -49,6 +49,7 @@ let idMsg = $("#id-msg");
 function joinIdCheck() {
     uidResult = false;
     var uid = uidObj.val();
+    /*console.log("id : "+uid);*/
     if(!regIdType(uid)){
         idMsg.removeClass('id-msg-green').addClass('id-msg-red');
         idMsg.text("소문자,숫자로 시작하는 특수문자[ - , _ ]조합으로 6~12자리내에 구성하세요.");
@@ -183,24 +184,27 @@ function finalCheck() {
 }
 
 /* 6. input값  정규식 */
+
 // 아이디 유효성
 function regIdType(data){
     // 아이디 유효성 체크(소문자,숫자로 시작하는 특수문자(-,_)조합으로 6~12자리)
-    let regex = /^[a-z0-9]+[a-z0-9_-]{6,12}$/g;
+    var regex = /^[0-9a-z](?=.*[0-9a-z_-]).{6,12}$/;
     return regex.test(data);
+
+
 }
 
 // 비밀번호 유효성
 function regPasswordType(data) {
     // 비밀번호(패스워드) 유효성 체크 (문자, 숫자, 특수문자의 조합으로 8~15자리)
-    let regex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}/;
+    var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,15}$/;
 
     return regex.test(data);
 }
 
 //이메일 유효성
 function regEmailType(data){
-    let regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
     return regex.test(data);
 }
 

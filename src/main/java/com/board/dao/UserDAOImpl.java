@@ -13,13 +13,20 @@
 package com.board.dao;
 
 import com.board.domain.UserVO;
+import com.board.service.UserService;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import javax.xml.stream.events.Namespace;
 
 
 @Repository
 public class UserDAOImpl implements UserDAO {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserDAOImpl.class);
 
     @Autowired
     protected SqlSessionTemplate sqlSessionTemplate;
@@ -27,17 +34,22 @@ public class UserDAOImpl implements UserDAO {
     private static final String NAMESPACE ="com.board.mapper.userMapper";
 
     @Override
-    public UserVO readByUid(String uid)  {
+    public UserVO readByUid(String uid) throws Exception  {
         return sqlSessionTemplate.selectOne(NAMESPACE+".readByUid", uid);
     }
 
     @Override
-    public UserVO readyByEmail(String email) {
+    public UserVO readyByEmail(String email) throws Exception {
         return sqlSessionTemplate.selectOne(NAMESPACE+".readByEmail", email);
     }
     @Override
-    public void create(UserVO uVO) {
-        sqlSessionTemplate.insert(NAMESPACE+".create",uVO);
+    public void createByUser(UserVO userVO) throws Exception {
+        sqlSessionTemplate.insert(NAMESPACE+".createByUser",userVO);
     }
 
+    @Override
+    public void updateAuthKey(UserVO userVO) throws Exception {
+        sqlSessionTemplate.update(NAMESPACE+".updateAuthKey",userVO);
+        logger.info(userVO.getUid() + " AuthKey Update  : " + userVO.getAuthkey());
+    }
 }
