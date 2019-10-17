@@ -28,7 +28,7 @@
 
 <ul>
     <li>Intellij IDEA 2019.02, JDK 1.8.0</li>
-    <li>Spring 3.9.5 STS</li>
+    <li>Spring 4.3.18.RELEASE</li>
     <li>Apache-Tomcat 8.5(WAS)</li>
     <li>Mysql(DB)</li>
     <li>Github</li>
