@@ -118,7 +118,7 @@ alter table tbl_like add foreign key(uid) references tbl_user(uid);
 
 <b>< ERD ></b>
 
-
+![Board Erd](https://user-images.githubusercontent.com/53209589/66992616-16227c00-f105-11e9-90a1-446331cac93c.PNG)
 
 <hr>
 
