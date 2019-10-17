@@ -145,7 +145,8 @@ alter table tbl_like add foreign key(uid) references tbl_user(uid);
         </ul>
       <b><li>이메일 인증</li></b>
         <ul>
-          <li>임시 회원가입 이후, 인증용 메일 수신(임의의 authkey정보 포함) -> 이메일 인증(사용자 권한 활성화)</li>
+          <li>임시 회원가입 이후, 인증용 메일 수신(트랜잭션처리로 메일발신 성공시 회원가입 commit ,임의의 authkey정보 포함) <br>
+            -> 이메일 인증(사용자 권한 활성화)</li>
         </ul>
     </ol>   
   </ul>
