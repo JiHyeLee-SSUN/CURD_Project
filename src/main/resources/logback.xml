@@ -81,20 +81,20 @@
     <!-- Query Loggers -->
     <logger name="jdbc" level="OFF"/>
 
-    <logger name="jdbc.sqlonly" level="DEBUG" additivity="false">
+    <logger name="jdbc.sqlonly" level="info" additivity="false">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="ERROR"/>
         <appender-ref ref="DEBUGFILE"/>
     </logger>
 
     <!-- log SQL with timing information, post execution -->
-    <logger name="jdbc.sqltiming" level="DEBUG" additivity="false">
+    <logger name="jdbc.sqltiming" level="info" additivity="false">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="ERROR"/>
         <appender-ref ref="DEBUGFILE"/>
     </logger>
 
-    <logger name="jdbc.resultsettable" level="DEBUG" additivity="false">
+    <logger name="jdbc.resultsettable" level="info" additivity="false">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="ERROR"/>
         <appender-ref ref="DEBUGFILE"/>
