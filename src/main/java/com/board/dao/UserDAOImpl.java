@@ -52,4 +52,8 @@ public class UserDAOImpl implements UserDAO {
         sqlSessionTemplate.update(NAMESPACE+".updateAuthKey",userVO);
         logger.info(userVO.getUid() + " AuthKey Update  : " + userVO.getAuthkey());
     }
+    @Override
+    public void updateAuthStatus(UserVO userVO) throws Exception {
+        sqlSessionTemplate.update(NAMESPACE+".updateAuthStatus", userVO);
+    }
 }

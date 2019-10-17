@@ -23,4 +23,9 @@
 		set authkey = #{authkey}
 		where email = #{email}
 	</update>
+	<update id="updateAuthStatus" >
+		update tbl_user
+		set authstatus = #{authstatus}
+		where authkey = #{authkey}
+	</update>
 </mapper>
