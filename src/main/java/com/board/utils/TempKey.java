@@ -10,7 +10,7 @@
  Blog : https://2-jissun.tistory.com/
  Github : https://github.com/JiHyeLee-SSUN/Project_Togather.git
  ***/
-package com.board.domain;
+package com.board.utils;
 
 import java.util.Random;
 

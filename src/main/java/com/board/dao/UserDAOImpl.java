@@ -13,14 +13,15 @@
 package com.board.dao;
 
 import com.board.domain.UserVO;
-import com.board.service.UserService;
+import com.board.dto.LoginDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import javax.xml.stream.events.Namespace;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Repository
@@ -37,7 +38,6 @@ public class UserDAOImpl implements UserDAO {
     public UserVO readByUid(String uid) throws Exception  {
         return sqlSessionTemplate.selectOne(NAMESPACE+".readByUid", uid);
     }
-
     @Override
     public UserVO readyByEmail(String email) throws Exception {
         return sqlSessionTemplate.selectOne(NAMESPACE+".readByEmail", email);
@@ -46,7 +46,6 @@ public class UserDAOImpl implements UserDAO {
     public void createByUser(UserVO userVO) throws Exception {
         sqlSessionTemplate.insert(NAMESPACE+".createByUser",userVO);
     }
-
     @Override
     public void updateAuthKey(UserVO userVO) throws Exception {
         sqlSessionTemplate.update(NAMESPACE+".updateAuthKey",userVO);
@@ -55,5 +54,26 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void updateAuthStatus(UserVO userVO) throws Exception {
         sqlSessionTemplate.update(NAMESPACE+".updateAuthStatus", userVO);
+    }
+
+    @Override
+    public UserVO login(LoginDTO lDTO) throws Exception {
+        lDTO.toString();
+        return sqlSessionTemplate.selectOne(NAMESPACE+".login", lDTO);
+    }
+    @Override
+    public UserVO readForCheckSession(String cookieValue) throws Exception {
+        logger.info(" cookievalue : "+cookieValue);
+        return sqlSessionTemplate.selectOne(NAMESPACE+".readForCheckSession", cookieValue);
+    }
+
+    @Override
+    public void updateForCookie(String uid, String sessionKey, Date sessionlimit) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", uid);
+        map.put("sessionKey", sessionKey);
+        map.put("sessionlimit", sessionlimit);
+        logger.info(" updateCookie .... uid : "+uid+" sessionKey : "+sessionKey+" sessionlimit : "+sessionlimit);
+        sqlSessionTemplate.update(NAMESPACE+".updateForCookie", map);
     }
 }

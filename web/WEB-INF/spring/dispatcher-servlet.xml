@@ -20,10 +20,27 @@
 
     <!-- interceptor -->
     <bean id="loggerInterceptor" class="com.board.interceptor.LoggerInterceptor"/>
+    <bean id="RememberUserInterceptor" class="com.board.interceptor.RememberUserInterceptor"/>
+    <bean id="loginInterceptor" class="com.board.interceptor.LoginInterceptor"/>
+
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/**"/>
+            <mvc:mapping path="/**/"/>
             <ref bean="loggerInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**/"/>
+            <ref bean="RememberUserInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/loginPost"/>
+            <ref bean="loginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

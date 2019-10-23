@@ -5,8 +5,19 @@
 
 <mapper namespace="com.board.mapper.userMapper">
     <insert id="createByUser">
-		insert into tbl_user(uid, pw, name, gender, email)
-		values (#{uid}, #{pw}, #{name}, #{gender}, #{email})
+		insert into tbl_user(
+		uid
+		, pw
+		, name
+		, gender
+		, email
+		) values (
+		#{uid}
+		, #{pw}
+		, #{name}
+		, #{gender}
+		, #{email}
+		)
 	</insert>
     <select id="readByUid" resultType="UserVO" parameterType="string">
 		select *
@@ -27,5 +38,23 @@
 		update tbl_user
 		set authstatus = #{authstatus}
 		where authkey = #{authkey}
+	</update>
+
+	<select id="login" resultType="UserVO">
+		select *
+		from tbl_user
+		where uid = #{uid} and pw = #{pw}
+	</select>
+	<select id="readForCheckSession" resultType="UserVO">
+		select *
+		from tbl_user
+		where sessionkey = #{cookieValue} and sessionlimit > now()
+	</select>
+	<update id="updateForCookie">
+		update tbl_user
+		set
+		sessionkey = #{sessionKey}
+		, sessionlimit = #{sessionlimit}
+		where uid = #{uid}
 	</update>
 </mapper>

@@ -12,6 +12,7 @@
  ***/
 package com.board.controller;
 
+import com.board.dto.LoginDTO;
 import com.board.domain.UserVO;
 import com.board.service.UserService;
 import org.slf4j.Logger;
@@ -25,8 +26,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.WebUtils;
 
-import java.io.Console;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 @Controller
 @RequestMapping("user")
@@ -99,6 +105,48 @@ public class UserController {
         userService.updateAuthStatus(uVO);
         model.addAttribute("auth_check", 1);
         return "user/joinPost";
+    }
+
+    //일반로그인
+    @RequestMapping(value="login", method=RequestMethod.GET)
+    public String loginGET() {
+        return "user/login";
+    }
+
+    @RequestMapping(value="loginPost", method=RequestMethod.POST)
+    public void loginPOST(LoginDTO lDTO, Model model, HttpSession session) throws Exception {
+        UserVO uVO = userService.login(lDTO);
+        if (uVO == null) {
+            return;
+        }
+        model.addAttribute("uVO", uVO);
+        if (lDTO.isUseCookie()) {
+            int amount = 60 * 60 * 24 * 7;
+            Date sessionlimit = new Date(System.currentTimeMillis() + (1000 * amount));
+
+            userService.updateForCookie(uVO.getUid(), session.getId(), sessionlimit);
+        }
+    }
+    // 로그아웃
+    @RequestMapping(value="logout", method=RequestMethod.GET)
+    public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+        Object obj = session.getAttribute("login");
+
+        if (obj != null) {
+            UserVO uVo = (UserVO) obj;
+            session.removeAttribute("login");
+            session.invalidate();
+
+            Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+            if (loginCookie != null) {
+                loginCookie.setPath("/");
+                loginCookie.setMaxAge(0);
+                response.addCookie(loginCookie);
+                userService.updateForCookie(uVo.getUid(), session.getId(), new Date());
+            }
+        }
+
+        return "redirect:/";
     }
 
 }
