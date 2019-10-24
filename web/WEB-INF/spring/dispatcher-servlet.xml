@@ -18,6 +18,8 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
+
+
     <!-- interceptor -->
     <bean id="loggerInterceptor" class="com.board.interceptor.LoggerInterceptor"/>
     <bean id="RememberUserInterceptor" class="com.board.interceptor.RememberUserInterceptor"/>
