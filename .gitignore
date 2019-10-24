@@ -121,3 +121,4 @@ target/
 #이메일 전송 개인정보 xml
 src/main/resources/**/emailConfig.xml
 
+!/src/main/resources/config/emailConfig.xml
