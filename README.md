@@ -123,7 +123,7 @@ alter table tbl_like add foreign key(uid) references tbl_user(uid);
 <hr>
 
 <b>< URL ></b>
- <br> http://52.78.131.105:8080/
+ <br>- http://52.78.131.105:8080/
   <br>
   - 현재 AWS의 google smtp차단으로 인해 회원가입 인증메일이 보내지지 않고 있습니다.
   
@@ -195,10 +195,10 @@ alter table tbl_like add foreign key(uid) references tbl_user(uid);
     </ol>
   </ul>
   
-  <b><li>About (구현 예정....)</li></b>
+  <b><li>About</li></b>
   <ul>
     <ol>
-      <b><li>관리자에게 메일 보내기(emailJS)</li></b>
+      <b><li>관리자에게 메일 보내기(emailJS 활용)</li></b>
       <ul>
           <li>사용자의 편의를 위한 간단한 메세지 보내기</li>
       </ul>
