@@ -58,7 +58,6 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public UserVO login(LoginDTO lDTO) throws Exception {
-        lDTO.toString();
         return sqlSessionTemplate.selectOne(NAMESPACE+".login", lDTO);
     }
     @Override

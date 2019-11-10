@@ -43,7 +43,7 @@
 	<select id="login" resultType="UserVO">
 		select *
 		from tbl_user
-		where uid = #{uid} and pw = #{pw}
+		where uid = #{uid} and pw = #{pw} and authstatus = 1;
 	</select>
 	<select id="readForCheckSession" resultType="UserVO">
 		select *

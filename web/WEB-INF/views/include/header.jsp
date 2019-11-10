@@ -66,7 +66,7 @@
                         <a class="dropdown-item" href="/user/logout" onclick="return confirm('로그아웃 하시겠습니까?');">
                             <i class="fa fa-sign-out"></i> 로그아웃</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/user/info"><i class="fa fa-user"></i> 내정보</a>
+                        <a class="dropdown-item" href="#"><i class="fa fa-user"></i> 내정보</a>
                     </c:if>
                 </div>
             </li>

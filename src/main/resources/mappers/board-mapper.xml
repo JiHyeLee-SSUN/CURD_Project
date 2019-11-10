@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.board.mapper.boardMapper">
+
+    <!-- tbl_board -->
+    <insert id="create">
+		INSERT INTO tbl_board (
+		title
+		, content
+		, writer
+		) VALUES (
+		#{title}
+		, #{content}
+		, #{writer}
+		)
+	</insert>
+
+	<select id="read" resultType="BoardVO">
+		SELECT *
+		FROM tbl_board
+		WHERE bno = #{bno}
+	</select>
+
+	<select id="readAll" resultType="BoardVO">
+		SELECT *
+		FROM tbl_board
+	</select>
+
+	<update id="update">
+		UPDATE tbl_board
+		SET
+		title = #{title}
+		, content = #{content}
+		WHERE bno = #{bno}
+	</update>
+
+	<update id="updateViewcnt">
+		UPDATE tbl_board
+		SET viewcnt = viewcnt + #{cnt}
+		WHERE bno = #{bno}
+	</update>
+
+	<update id="updateReplycnt">
+		UPDATE tbl_board
+		SET replycnt = replycnt + #{cnt}
+		WHERE bno = #{bno}
+	</update>
+
+	<update id="updateLikecnt">
+		UPDATE tbl_board
+		SET likecnt = likecnt + #{cnt}
+		WHERE bno = #{bno}
+	</update>
+
+	<delete id="delete">
+		DELETE
+		FROM tbl_board
+		WHERE bno = #{bno}
+	</delete>
+
+</mapper>

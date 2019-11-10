@@ -6,5 +6,6 @@
 <configuration>
     <typeAliases >
         <typeAlias alias="UserVO" type ="com.board.domain.UserVO"/>
+        <typeAlias alias="BoardVO" type ="com.board.domain.BoardVO"/>
     </typeAliases>
 </configuration>
