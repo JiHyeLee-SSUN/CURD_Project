@@ -32,6 +32,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession httpSession = request.getSession();
+        logger.info("LoginInterceptor...");
         if (httpSession.getAttribute(LOGIN) != null){
             logger.info("clear login data before....");
             httpSession.removeAttribute(LOGIN);
@@ -58,7 +59,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             }
 
             String destination = (String) httpSession.getAttribute("destination");
+            logger.info(destination);
             response.sendRedirect(destination != null ? destination : "/");
+            httpSession.removeAttribute("destination");
         }
     }
 }

@@ -20,7 +20,7 @@ public class BoardVO {
     private String title;
     private String content;
     private String writer;
-    private Date regdate;
+    private String regdate;
     private int viewcnt;
     private int replycnt;
     private int likecnt;
@@ -58,11 +58,11 @@ public class BoardVO {
         this.writer = writer;
     }
 
-    public Date getRegdate() {
+    public String getRegdate() {
         return regdate;
     }
 
-    public void setRegdate(Date regdate) {
+    public void setRegdate(String regdate) {
         this.regdate = regdate;
     }
 

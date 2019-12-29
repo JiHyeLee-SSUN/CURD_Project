@@ -15,6 +15,9 @@
 
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
     <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/img/**" location="/resources/img/"/>
+    <mvc:resources mapping="/js/**" location="/resources/js/"/>
+    <mvc:resources mapping="/css/**" location="/resources/css/"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"></property>
@@ -28,8 +31,8 @@
 
     <!-- interceptor -->
     <bean id="loggerInterceptor" class="com.board.interceptor.LoggerInterceptor"/>
-    <bean id="RememberUserInterceptor" class="com.board.interceptor.RememberUserInterceptor"/>
     <bean id="loginInterceptor" class="com.board.interceptor.LoginInterceptor"/>
+    <bean id="authInterceptor" class="com.board.interceptor.AuthInterceptor"/>
 
     <mvc:interceptors>
         <mvc:interceptor>
@@ -40,15 +43,19 @@
 
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/**/"/>
-            <ref bean="RememberUserInterceptor"/>
+            <mvc:mapping path="/user/loginPost"/>
+            <ref bean="loginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/user/loginPost"/>
-            <ref bean="loginInterceptor"/>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/"/>
+            <mvc:exclude-mapping path="/about"/>
+            <mvc:exclude-mapping path="/user/**"/>
+            <mvc:exclude-mapping path="/resources/**"/>
+            <ref bean="authInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

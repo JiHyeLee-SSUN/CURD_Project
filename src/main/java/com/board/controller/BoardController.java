@@ -12,6 +12,7 @@
  ***/
 package com.board.controller;
 
+import com.board.domain.BoardVO;
 import com.board.service.BoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +44,10 @@ public class BoardController {
         return "boards/new";
     }
 
-
+    @RequestMapping(value = "post", method = RequestMethod.POST)
+    public String createPOST(BoardVO bVO) throws Exception {
+        boardService.create(bVO);
+        return "redirect:/boards";
+    }
 
 }

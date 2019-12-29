@@ -71,6 +71,7 @@
                         <td rowspan="2" style=" color:gray;">
                             &nbsp;&#35; <i>${bVo.bno }</i>&nbsp;&nbsp;
                                 ${bVo.title }
+                            <a ></a>
                         </td>
                         <td rowspan="2">
                             <i class="fa fa-comment"></i> ${bVo.replycnt }
@@ -81,18 +82,11 @@
                         <td rowspan="2">
                             <i class="fa fa-eye"></i> ${bVo.viewcnt }
                         </td>
-                        <td rowspan="2">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="..." alt="IMG">
-                                </a>
-                            </div>
-                        </td>
+
                         <td width="200px">${bVo.writer }</td>
                     </tr>
                     <tr>
-                        <fmt:formatDate var="regdate" value="${bVo.regdate }" pattern="yyyy-MM-dd hh:mm:ss"/>
-                        <td width="200px">${regdate }</td>
+                        <td width="200px">${bVo.regdate }</td>
                     </tr>
                 </c:forEach>
 

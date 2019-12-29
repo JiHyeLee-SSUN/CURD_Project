@@ -25,7 +25,14 @@
 	</select>
 
 	<select id="readAll" resultType="BoardVO">
-		SELECT *
+		SELECT
+		bno
+		,title
+		,writer
+		,viewcnt
+		,replycnt
+		,likecnt
+		,DATE_FORMAT(regdate, '%Y-%m-%d') AS regdate
 		FROM tbl_board
 	</select>
 
