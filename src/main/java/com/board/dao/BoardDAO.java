@@ -26,9 +26,4 @@ public interface BoardDAO {
     public void delete(int bno) throws Exception;
 
 
-
-    //파일 추가
-    public void createAttach(String fileName) throws Exception;
-
-
 }

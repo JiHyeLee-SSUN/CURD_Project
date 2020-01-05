@@ -28,6 +28,21 @@
     <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
     <%--jquery--%>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script>
+        var url = location.href;
+        var idxBoard = url.indexOf("board");
+        var idxAbout = url.indexOf("about");
+
+        if (idxBoard != -1) {
+            $("#board").addClass("active");
+            $("#home").removeClass("active");
+        }
+        if (idxAbout != -1) {
+            $("#about").addClass("active");
+            $("#home").removeClass("active");
+        }
+    </script>
+
 </head>
 
 <body>
@@ -88,18 +103,5 @@
 </nav>
 
 
-<script>
-    var url = location.href;
-    var idxBoard = url.indexOf("board");
-    var idxAbout = url.indexOf("about");
 
-    if (idxBoard != -1) {
-        $("#board").addClass("active");
-        $("#home").removeClass("active");
-    }
-    if (idxAbout != -1) {
-        $("#about").addClass("active");
-        $("#home").removeClass("active");
-    }
-</script>
 

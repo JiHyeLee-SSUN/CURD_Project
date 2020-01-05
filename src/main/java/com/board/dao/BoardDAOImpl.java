@@ -82,7 +82,6 @@ public class BoardDAOImpl implements BoardDAO {
         Map<String, Integer> map = new HashMap<>();
         map.put("bno", bno);
         map.put("cnt", cnt);
-
         sqlSessionTemplate.update(NAMESPACE +".updateLikecnt", map);
     }
 
@@ -91,8 +90,4 @@ public class BoardDAOImpl implements BoardDAO {
         sqlSessionTemplate.delete(NAMESPACE +".delete", bno);
     }
 
-    @Override
-    public void createAttach(String fileName) throws Exception {
-        sqlSessionTemplate.insert(NAMESPACE+".createAttach",fileName);
-    }
 }

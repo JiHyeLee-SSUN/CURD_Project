@@ -20,6 +20,7 @@
 
 	<select id="read" resultType="BoardVO">
 		SELECT *
+		,DATE_FORMAT(regdate, '%Y-%m-%d HH:MI:SS') AS regdate
 		FROM tbl_board
 		WHERE bno = #{bno}
 	</select>

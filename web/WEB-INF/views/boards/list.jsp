@@ -17,6 +17,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../include/header.jsp" %>
 
+
 <!-- 검색 -->
 <div class="container">
     <div class="panel-body">
@@ -60,36 +61,38 @@
         <div class="table-responsive">
             <table class="table table-hover">
                 <tr>
-                    <th width="550px">제목</th>
+                    <th width="100x">번호</th>
+                    <th width="450px">제목</th>
                     <th width="100px">댓글</th>
                     <th width="100px">추천</th>
                     <th width="100px">조회</th>
-                    <th colspan="2">작성자</th>
+                    <th width="100px">작성자</th>
+                    <th width="100px">날짜</th>
                 </tr>
                 <c:forEach var="bVo" items="${list }">
                     <tr>
-                        <td rowspan="2" style=" color:gray;">
-                            &nbsp;&#35; <i>${bVo.bno }</i>&nbsp;&nbsp;
-                                ${bVo.title }
-                            <a ></a>
+                        <td style=" color:gray;">
+                            &nbsp;&#35;
+                            <i>${bVo.bno }</i>&nbsp;&nbsp;
                         </td>
-                        <td rowspan="2">
+                        <td>
+                            <a href="/boards/read?bno=${bVo.bno }" style="color:#333;text-decoration: none;" >
+                                    ${bVo.title }
+                            </a>
+                        </td>
+                        <td >
                             <i class="fa fa-comment"></i> ${bVo.replycnt }
                         </td>
-                        <td rowspan="2">
+                        <td >
                             <i class="fa fa-heart"></i> ${bVo.likecnt }
                         </td>
-                        <td rowspan="2">
+                        <td >
                             <i class="fa fa-eye"></i> ${bVo.viewcnt }
                         </td>
-
-                        <td width="200px">${bVo.writer }</td>
-                    </tr>
-                    <tr>
-                        <td width="200px">${bVo.regdate }</td>
+                        <td >${bVo.writer }</td>
+                        <td >${bVo.regdate }</td>
                     </tr>
                 </c:forEach>
-
             </table>
         </div>
         <%--<div align="center" style="font-size:4em;color: gray;">

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.board.mapper.likeMapper">
+	<insert id="create">
+		<selectKey keyProperty="lno" resultType="int" order="AFTER">
+			SELECT LNO
+			FROM TBL_LIKE
+			WHERE BNO = #{bno} AND UID = #{uid}
+		</selectKey>
+		INSERT INTO TBL_LIKE(BNO,UID)
+		VALUES (#{bno},#{uid})
+	</insert>
+
+	<select id="read" resultType="likeVO">
+		SELECT *
+		FROM TBL_LIKE
+		WHERE BNO = #{bno} AND UID = #{uid}
+	</select>
+
+	<delete id="delete">
+		DELETE FROM TBL_LIKE
+		WHERE BNO = #{bno} AND UID=#{uid}
+	</delete>
+</mapper>

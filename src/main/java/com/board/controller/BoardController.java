@@ -13,14 +13,25 @@
 package com.board.controller;
 
 import com.board.domain.BoardVO;
+import com.board.domain.UserVO;
 import com.board.service.BoardService;
+import com.board.service.LikeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("boards")
@@ -31,12 +42,73 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
+    @Autowired
+    private LikeService likeService;
+
     // 전체 글 목록 화면
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String readAll(Model model) throws Exception {
         model.addAttribute("list", boardService.readAll());
         return "boards/list";
     }
+
+    //글 조회화면
+    @RequestMapping(value = "read", method = RequestMethod.GET)
+    public String readArticle(HttpServletRequest request, @RequestParam("bno") int bno, Model model) throws Exception {
+        HttpSession session = request.getSession();
+        UserVO uVO = (UserVO) session.getAttribute("login");
+        String uid = uVO.getUid();
+
+        model.addAttribute("bVO", boardService.read(bno));
+        model.addAttribute("like", likeService.read(bno, uid));
+
+        return "/boards/view";
+    }
+
+    // 추천기능
+    @RequestMapping(value = "like", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<String> like(HttpServletRequest request, @RequestParam("bno") int bno) {
+        HttpSession session = request.getSession();
+        UserVO uVO = (UserVO) session.getAttribute("login");
+        String uid = uVO.getUid();
+
+        ResponseEntity<String> entity = null;
+        try {
+            if (likeService.create(bno,uid) > 0) {
+                entity = new ResponseEntity<>("SUCCESS ", HttpStatus.OK);
+                logger.info(String.valueOf(entity));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return entity;
+    }
+
+    // 추천해제기능
+    @RequestMapping(value = "unlike", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<String> unlike(HttpServletRequest request, @RequestParam("bno") int bno) {
+        HttpSession session = request.getSession();
+        UserVO uVO = (UserVO) session.getAttribute("login");
+        String uid = uVO.getUid();
+
+        ResponseEntity<String> entity = null;
+        try {
+            if (likeService.delete(bno,uid) > 0) {
+                entity = new ResponseEntity<>("SUCCESS DELETE", HttpStatus.OK);
+                logger.info(String.valueOf(entity));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return entity;
+    }
+
 
     // 글 쓰기 화면
     @RequestMapping(value = "new", method = RequestMethod.GET)
